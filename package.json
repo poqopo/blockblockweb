@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "test": "jest --watchAll",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "aws s3 sync ./dist s3://blockblockweb --profile=blockblock",
+    "invalidate": "aws cloudfront create-invalidation --profile=blockblock --distribution-id E23X78OHHAR4FG --path /*"
   },
   "dependencies": {
     "@mui/material": "^5.15.7",
@@ -16,6 +18,7 @@
     "qrcode.react": "^3.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
