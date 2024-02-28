@@ -10,9 +10,9 @@ function App() {
         {
           path: '/',
           element: <Home />,
-        }
-      ]
-    }
+        },
+      ],
+    },
   ]);
   return element;
 }

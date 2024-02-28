@@ -1,53 +1,60 @@
-import QRCode from 'qrcode.react';
-import { useState } from 'react';
-import { getMobileAddress } from '@/util';
+import { useEffect, useState } from 'react';
+import { connect, getAccount } from 'toppin';
+import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
+import { pageChange } from 'src/redux/Slices/page';
+import { getSDK } from '@/redux/Slices/sdk';
+import { getAddress } from '@/redux/Slices/user';
 
 function Home() {
-  const DEFAULT_QR_CODE = 'DEFAULT';
-  const [qrvalue, setQrvalue] = useState<string>(DEFAULT_QR_CODE);
-  const [user, setUser] = useState('');
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0.3,
+  });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (inView) {
+      dispatch(pageChange({ curPage: 'HOME' }));
+    }
+  }, [inView]);
 
-  const onGetAddress = () => {
-    getMobileAddress(setQrvalue, setUser);
+  const sdk = useSelector((state: any) => state.sdk.sdk);
+  const account = useSelector((state: any) => state.user.address);
+
+  const handleLogin = async () => {
+    const updateState = (value: any) => {
+      dispatch(getAddress({ address: value }));
+    };
+    dispatch(getSDK(sdk));
+
+    if (sdk) {
+      // sdk가 정의되었는지 확인
+      const address = await getAccount(sdk);
+      updateState(address);
+    } else {
+      console.warn('SDK is not initialized yet.');
+    }
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="relative inset-x-auto top-1/3 text-white font-extrabold">
-        <div className="text-center font-['Tenada'] leading-tight">
-          <h1 className="mr-[45px] text-[48px]">Block</h1>
-          <h1 className="ml-[45px] text-[48px]">Block</h1>
-        </div>
-        <div className="mx-auto my-[20px] text-white text-center">
+    <div
+      ref={ref}
+      id="HOME"
+      className="w-screen h-screen text-white font-extrabold flex items-center"
+    >
+      <div className="text-center m-auto">
+        <h1 className="text-[48px] font-['Tenada'] leading-tight ">TOPPIN</h1>
+        <div className="text-white text-center text-lg">
           Where We Make History
         </div>
-
-        <div className="w-full px-10">
-          <button
-            className="w-full h-[50px] bg-[#FEE500] rounded-xl text-[#3A1D1D] text-[18px] font-extrabold"
-            onClick={onGetAddress}
-            type="button"
-          >
-            <div className="flex gap-x-5 my-auto">
-              <img
-                src="/klip.png"
-                className="ml-5 my-auto w-[60px] h-[20px]"
-                alt="Loading..."
-              />
-              <p className="my-auto">Klip 지갑 연결하기</p>
-            </div>
-          </button>
-        </div>
-        {qrvalue !== DEFAULT_QR_CODE ? (
-          <div className="fixed top-1/3 left-0 right-0 p-10 bg-[#141717] shadow-2xl	flex flex-col place-content-center text-center">
-            <h1 className="text-[20px] font-extrabold my-5">
-              QR 코드를 찍어 로그인하세요!
-            </h1>
-            <QRCode className="mx-auto" value={qrvalue} />
-          </div>
-        ) : (
-          <div />
-        )}
+        <button
+          className="mx-auto w-full my-10 px-10 py-2 text-center h-[50px] bg-[#FEE500] rounded-xl text-[#3A1D1D] text-[18px] font-extrabold"
+          onClick={handleLogin}
+          type="button"
+        >
+          <p className="m-auto"> Connect Wallet</p>
+        </button>
+        <p>{account}</p>
       </div>
     </div>
   );
