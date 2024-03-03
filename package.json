@@ -8,10 +8,14 @@
     "test": "jest --watchAll",
     "preview": "vite preview",
     "prepare": "husky install",
-    "deploy": "aws s3 sync ./dist s3://blockblockweb --profile=blockblock",
+    "deploy": "aws s3 sync ./dist s3://blockblockhomepage --profile=blockblock",
     "invalidate": "aws cloudfront create-invalidation --profile=blockblock --distribution-id E23X78OHHAR4FG --path /*"
   },
   "dependencies": {
+    "@metamask/detect-provider": "^2.0.0",
+    "@metamask/providers": "^15.0.0",
+    "@metamask/sdk": "^0.15.0",
+    "@metamask/sdk-react": "^0.15.0",
     "@reduxjs/toolkit": "^2.2.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.10.1",

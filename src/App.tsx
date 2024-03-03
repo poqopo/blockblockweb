@@ -1,20 +1,12 @@
-import { useRoutes } from 'react-router-dom';
-import DefaultLayout from './pages/DefaultLayout';
-import Home from './pages/Home';
+import { Home } from './pages/Home';
+import { MetaMaskError } from './Components/MetaMaskError';
 
 function App() {
-  const element = useRoutes([
-    {
-      element: <DefaultLayout />,
-      children: [
-        {
-          path: '/',
-          element: <Home />,
-        },
-      ],
-    },
-  ]);
-  return element;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 }
 
 export default App;
