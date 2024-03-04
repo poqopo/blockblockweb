@@ -1,6 +1,7 @@
 import { useMetaMask } from '@/hooks/useMetaMask';
 import Login from '@/pages/Login';
 import { formatChainAsNum } from '@/utils';
+import { useEffect } from 'react';
 
 export function Home() {
   const { wallet, connectMetaMask } = useMetaMask();
