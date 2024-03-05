@@ -27,7 +27,7 @@ function Login() {
   const postAttendance = async () => {
     let response = await myContract.methods.attend().send({
       from: wallet.accounts[0],
-      to: contractAddr,
+      // to: contractAddr,
     });
     console.log('response: ', response);
   };
@@ -39,7 +39,7 @@ function Login() {
   const postName = async () => {
     let response = await myContract.methods.attend(inputval).send({
       from: wallet.accounts[0],
-      to: contractAddr,
+      // to: contractAddr,
     });
     console.log('response: ', response);
   };
