@@ -22,7 +22,7 @@ function Admin() {
     let myContract = new web3.eth.Contract(abi, contractAddr);
     let response = await myContract.methods.setManager(inputval).send({
       from: wallet.accounts[0],
-      to: contractAddr,
+      // to: contractAddr,
     });
     console.log('response: ', response);
   };
@@ -32,7 +32,7 @@ function Admin() {
     let myContract = new web3.eth.Contract(abi, contractAddr);
     let response = await myContract.methods.startAttendance().send({
       from: wallet.accounts[0],
-      to: contractAddr,
+      // to: contractAddr,
     });
     console.log('response: ', response);
   };
@@ -41,7 +41,7 @@ function Admin() {
     let myContract = new web3.eth.Contract(abi, contractAddr);
     let response = await myContract.methods.stopAttendance().send({
       from: wallet.accounts[0],
-      to: contractAddr,
+      // to: contractAddr,
     });
     console.log('response: ', response);
   };
