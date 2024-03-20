@@ -2,6 +2,7 @@ import { Home } from './pages/Home';
 import { MetaMaskError } from './Components/MetaMaskError';
 import { useRoutes } from 'react-router-dom';
 import Admin from './pages/Admin';
+import { useEffect } from 'react';
 
 function App() {
   const element = useRoutes([

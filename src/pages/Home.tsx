@@ -2,6 +2,7 @@ import { useMetaMask } from '@/hooks/useMetaMask';
 import Login from '@/pages/Login';
 import { formatChainAsNum } from '@/utils';
 import { useEffect } from 'react';
+import { useSDK } from '@metamask/sdk-react';
 
 export function Home() {
   const { wallet, connectMetaMask } = useMetaMask();
