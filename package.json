@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^2.0.0",
-    "@metamask/providers": "^15.0.0",
+    "@metamask/providers": "^14.0.2",
     "@metamask/sdk": "^0.15.0",
     "@metamask/sdk-react": "^0.15.0",
     "@reduxjs/toolkit": "^2.2.1",

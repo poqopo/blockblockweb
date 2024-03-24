@@ -12,6 +12,7 @@ export default {
     app.stack(function Site({ stack }) {
       const site = new StaticSite(stack, 'react', {
         buildOutput: 'dist',
+        buildCommand: 'tsc && vite build',
         customDomain: {
           domainName:
             stack.stage === 'prod'
