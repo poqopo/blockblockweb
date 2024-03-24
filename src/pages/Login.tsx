@@ -16,13 +16,21 @@ function Login() {
   const [inputval, setInputVal] = useState('');
   const [viewscore, setViewScore] = useState(true);
 
+  const changeNetwork = async () => {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        {
+          chainId: '0x5',
+        },
+      ],
+    });
+  };
+
   useEffect(() => {
     viewName();
+    changeNetwork();
   }, []);
-
-  if (wallet.chainId != '0x5') {
-    window.alert('Please Switch to Goerli network');
-  }
 
   const postAttendance = async () => {
     let response = await myContract.methods.attend().send({
